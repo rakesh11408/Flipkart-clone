@@ -29,8 +29,11 @@ const UserTable = () => {
             enqueueSnackbar("User Deleted Successfully", { variant: "success" });
             dispatch({ type: DELETE_USER_RESET });
         }
-        dispatch(getAllUsers());
     }, [dispatch, error, deleteError, isDeleted, enqueueSnackbar]);
+
+    useEffect(() => {
+        dispatch(getAllUsers());
+    }, [dispatch]);
 
     const deleteUserHandler = (id) => {
         dispatch(deleteUser(id));

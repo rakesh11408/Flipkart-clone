@@ -30,8 +30,11 @@ const OrderTable = () => {
             enqueueSnackbar("Deleted Successfully", { variant: "success" });
             dispatch({ type: DELETE_ORDER_RESET });
         }
-        dispatch(getAllOrders());
     }, [dispatch, error, deleteError, isDeleted, enqueueSnackbar]);
+
+    useEffect(() => {
+        dispatch(getAllOrders());
+    }, [dispatch]);
 
     const deleteOrderHandler = (id) => {
         dispatch(deleteOrder(id));

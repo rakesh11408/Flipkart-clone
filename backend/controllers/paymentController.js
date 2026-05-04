@@ -215,15 +215,14 @@ exports.getPaymentStatus = asyncErrorHandler(async (req, res, next) => {
     });
 });
 
-// Initialize Razorpay instance
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
-
 // Create Razorpay Order
 exports.createRazorpayOrder = asyncErrorHandler(async (req, res, next) => {
     const { amount, currency = 'INR', receipt } = req.body;
+
+    const razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
 
     const options = {
         amount: amount * 100, // amount in smallest currency unit (paise)

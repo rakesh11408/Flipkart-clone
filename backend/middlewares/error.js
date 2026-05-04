@@ -1,8 +1,18 @@
 const ErrorHandler = require("../utils/errorHandler");
 
 module.exports = (err, req, res, next) => {
+    // Ensure err is an object
+    if (typeof err !== 'object' || err === null) {
+        err = new ErrorHandler(err || "Internal Server Error", 500);
+    }
+
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
+
+    // Ensure statusCode is a valid number
+    if (typeof err.statusCode !== 'number' || err.statusCode < 100 || err.statusCode > 599) {
+        err.statusCode = 500;
+    }
 
     // mongodb id error
     if (err.name === "CastError") {

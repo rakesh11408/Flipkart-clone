@@ -77,7 +77,7 @@ const MainData = () => {
             {
                 backgroundColor: ['#ef4444', '#22c55e'],
                 hoverBackgroundColor: ['#dc2626', '#16a34a'],
-                data: [outOfStock, products.length - outOfStock],
+                data: [outOfStock, (products?.length || 0) - outOfStock],
             },
         ],
     };

@@ -19,9 +19,6 @@ const ReviewsTable = () => {
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.review);
 
     useEffect(() => {
-        if (productId.length === 24) {
-            dispatch(getAllReviews(productId));
-        }
         if (error) {
             enqueueSnackbar(error, { variant: "error" });
             dispatch(clearErrors());
@@ -34,7 +31,13 @@ const ReviewsTable = () => {
             enqueueSnackbar("Review Deleted Successfully", { variant: "success" });
             dispatch({ type: DELETE_REVIEW_RESET });
         }
-    }, [dispatch, error, deleteError, isDeleted, productId, enqueueSnackbar]);
+    }, [dispatch, error, deleteError, isDeleted, enqueueSnackbar]);
+
+    useEffect(() => {
+        if (productId.length === 24) {
+            dispatch(getAllReviews(productId));
+        }
+    }, [dispatch, productId]);
 
     const deleteReviewHandler = (id) => {
         dispatch(deleteReview(id, productId));

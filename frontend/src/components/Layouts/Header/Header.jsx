@@ -1,6 +1,7 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Searchbar from './Searchbar';
 import logo from '../../../assets/images/logo.png';
 import PrimaryDropDownMenu from './PrimaryDropDownMenu';
@@ -58,6 +59,16 @@ const Header = () => {
           </span>
 
           {toggleSecondaryDropDown && <SecondaryDropDownMenu />}
+
+          {isAuthenticated && user && user.role === "admin" && (
+            <Link
+              to="/admin/dashboard"
+              className="flex items-center gap-1 sm:gap-1.5 bg-white text-primary-blue px-2 sm:px-3 py-1 rounded-sm font-semibold text-xs sm:text-sm whitespace-nowrap hover:bg-blue-50 transition-colors"
+            >
+              <DashboardIcon sx={{ fontSize: { xs: "14px", sm: "16px" } }} />
+              <span>Admin</span>
+            </Link>
+          )}
 
           <Link to="/cart" className="flex items-center text-white font-medium gap-1 sm:gap-2 relative text-xs sm:text-sm">
             <span><ShoppingCartIcon sx={{ fontSize: { xs: "18px", sm: "24px" } }} /></span>

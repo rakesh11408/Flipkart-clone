@@ -36,8 +36,11 @@ const UpdateOrder = () => {
             enqueueSnackbar("Order Updates Successfully", { variant: "success" });
             dispatch({ type: UPDATE_ORDER_RESET });
         }
+    }, [dispatch, error, isUpdated, updateError, enqueueSnackbar]);
+
+    useEffect(() => {
         dispatch(getOrderDetails(params.id));
-    }, [dispatch, error, params.id, isUpdated, updateError, enqueueSnackbar]);
+    }, [dispatch, params.id]);
 
     const updateOrderSubmitHandler = (e) => {
         e.preventDefault();
